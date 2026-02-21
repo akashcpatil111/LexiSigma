@@ -1,4 +1,4 @@
-import type { EditorConfig, NodeKey, SerializedLexicalNode } from 'lexical';
+import type { NodeKey, SerializedLexicalNode, LexicalNode } from 'lexical';
 import { DecoratorNode } from 'lexical';
 import type { JSX } from 'react';
 import MathComponent from './MathComponent';
@@ -23,7 +23,7 @@ export class MathNode extends DecoratorNode<JSX.Element> {
         this.__equation = equation;
     }
 
-    createDOM(_config: EditorConfig): HTMLElement {
+    createDOM(): HTMLElement {
         const span = document.createElement('span');
         span.style.display = 'inline-block';
         return span;
@@ -65,6 +65,6 @@ export function $createMathNode(equation = ''): MathNode {
     return new MathNode(equation);
 }
 
-export function $isMathNode(node: any): node is MathNode {
+export function $isMathNode(node: LexicalNode | null | undefined): node is MathNode {
     return node instanceof MathNode;
 }
